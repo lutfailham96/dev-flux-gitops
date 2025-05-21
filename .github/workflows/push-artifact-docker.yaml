@@ -1,6 +1,9 @@
 name: Push Flux Artifact to OCI Registry
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       oci_registry:
