@@ -24,6 +24,11 @@ on:
         required: true
         default: 'no'
 
+env:
+  OCI_REGISTRY: ${{ github.event.inputs.oci_registry || 'oci://docker.io/lutfailham/dev-flux-gitops' }}
+  CLUSTER_NAME: ${{ github.event.inputs.cluster_name || 'dev-cluster' }}
+  CONFIRM_PRODUCTION: ${{ github.event.inputs.confirm_production || 'no' }}
+
 jobs:
   push_flux_artifact:
     runs-on: ubuntu-latest
@@ -43,13 +48,13 @@ jobs:
 
       - name: Push Flux artifact to OCI registry
         run: |
-          if [[ "${{ github.event.inputs.cluster_name }}" == "production" && "${{ github.event.inputs.confirm_production }}" == "yes" ]]; then
+          if [[ "${CLUSTER_NAME}" == "production" && "${CONFIRM_PRODUCTION}" == "yes" ]]; then
             echo "You need to confirm deployment to production cluster!"
             exit 1
           fi
-          echo "Deploying to ${{ github.event.inputs.cluster_name }} cluster..."
-          flux push artifact ${{ github.event.inputs.oci_registry }}:${{ github.event.inputs.cluster_name }} \
-            --path="./manifests/${{ github.event.inputs.cluster_name }}/" \
+          echo "Deploying to ${CLUSTER_NAME} cluster..."
+          flux push artifact ${OCI_REGISTRY}:${CLUSTER_NAME} \
+            --path="./manifests/${CLUSTER_NAME}/" \
             --source="${{ github.server_url }}/${{ github.repository }}" \
             --revision="${{ github.sha }}" \
             --annotations="org.opencontainers.image.url=${{ github.server_url }}/${{ github.repository }}/media/icon.png" \
