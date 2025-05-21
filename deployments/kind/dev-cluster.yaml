@@ -12,6 +12,9 @@ name: dev-cluster
 #
 # You probably don't need this unless you are testing Kubernetes itself.
 nodes:
-- role: control-plane
-- role: worker
-- role: worker
+  - role: control-plane
+    image: kindest/node:v1.32.5
+  - role: worker
+    image: kindest/node:v1.32.5
+  - role: worker
+    image: kindest/node:v1.32.5
