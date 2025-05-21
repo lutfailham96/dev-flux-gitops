@@ -31,7 +31,7 @@ jobs:
 
       - name: Push Flux artifact to OCI registry
         run: |
-          flux push ${{ github.event.inputs.oci_registry }}":${{ github.event.inputs.cluster_name }}" \
+          flux push ${{ github.event.inputs.oci_registry }}:${{ github.event.inputs.cluster_name }} \
             --path="./manifests/${{ github.event.inputs.cluster_name }}/" \
             --source="${{ github.repository_url }}" \
             --revision="${{ github.sha }}" \
