@@ -33,9 +33,9 @@ jobs:
         run: |
           flux push artifact ${{ github.event.inputs.oci_registry }}:${{ github.event.inputs.cluster_name }} \
             --path="./manifests/${{ github.event.inputs.cluster_name }}/" \
-            --source="${{ github.repository_url }}" \
+            --source="${{ github.server_url }}/${{ github.repository }}" \
             --revision="${{ github.sha }}" \
-            --annotations="org.opencontainers.image.url=${{ github.repository_url }}" \
+            --annotations="org.opencontainers.image.url=${{ github.server_url }}/${{ github.repository }}/media/icon.png" \
             --annotations="org.opencontainers.image.title=${{ github.event.repository.name }}" \
             --annotations="com.github.event_id=${{ github.run_id }}" \
             --annotations="com.github.run_url=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
