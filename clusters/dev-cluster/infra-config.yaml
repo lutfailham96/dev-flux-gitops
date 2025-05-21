@@ -10,7 +10,7 @@ spec:
   prune: true
   wait: true
   sourceRef:
-    kind: GitRepository
-    name: flux-system
+    kind: OCIRepository
+    name: manifests
     namespace: flux-system
   path: ./manifests/dev-cluster/infrastructure/config/

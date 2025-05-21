@@ -1,0 +1,12 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: manifests
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  url: oci://docker.io/lutfailham/dev-flux-gitops
+  ref:
+    tag: dev-cluster
+  secretRef:
+    name: registry-docker
