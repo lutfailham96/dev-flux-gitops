@@ -13,4 +13,4 @@ spec:
     kind: OCIRepository
     name: manifests
     namespace: flux-system
-  path: ./manifests/dev-cluster/infrastructure/controllers/
+  path: ./infrastructure/controllers/
